@@ -67,7 +67,7 @@ let question = [
 // Timer starts
 // The first question appears (with its answers)  
 
-let secondsLeft = 10;
+let secondsLeft = 100;
 
 startButton.addEventListener('click', function (event) {
   event.preventDefault()
@@ -79,8 +79,6 @@ startButton.addEventListener('click', function (event) {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
 
-
-
     if (secondsLeft === 0) {
       clearInterval(timerInteval);
       endScreen.classList.remove("hide")
@@ -90,15 +88,13 @@ startButton.addEventListener('click', function (event) {
   }, 1000);
 
 
-
-
-
   showQuestion()
 })
 
+let questionNumber = 0;
+
 
 function showQuestion() {
-  let questionNumber = 0;
   //when the question number is 0 
   //We want to get the question 0 and the choices at question 0 
   //add button elements to the list items 
@@ -106,27 +102,39 @@ function showQuestion() {
   //When the user click a question we go to the next question 
   //if the user Clicks the correct choice we signal correct else wrong
 
-  questionTitle.innerText = question[0].title;
-  //  // for (let i = 0; i < question.length; i++) {
-  // questionTitle.innerText= question[i].title;    
+  questionTitle.innerText = question[questionNumber].title;
 
-  for (let i = 0; i < 3; i++) {
-    let answers = document.createElement('li')
-    answers.innerText = question[0].choices[i]
-    console.log(answers)
-    unoList.appendChild(answers)
-    answerOptions.appendChild(unoList)
+  function displayAnswers() {
+    for (let i = 0; i < 3; i++) {
+      let answers = document.createElement('li')
+      answers.innerText = question[questionNumber].choices[i]
+      console.log(answers)
+      unoList.appendChild(answers)
+      answerOptions.appendChild(unoList)
 
-    answers.addEventListener('click', function (event) {
-      event.preventDefault()
-      event.stopPropagation()
-      if (question[0].correctAnswer == i) {
-        console.log("you are right")
-      }
-      else { console.log("you are wrong") }
-    })
+      answers.addEventListener('click', function (event) {
+        event.preventDefault()
+        event.stopPropagation()
+        if (question[questionNumber].correctAnswer == i) {
+          console.log("you are right")
+        }
+        else { console.log("you are wrong") }
+        questionNumber = questionNumber + 1
+        questionTitle.innerText = question[questionNumber].title;
+
+        //upon click of a answer I want to display the next question 
+        //upon click on an answer I want to display th next set of choices 
+        //If we reach the last question then we want to go to the end screen after click of answer
+      })
+    }
   }
+
+  displayAnswers()
+
+
 }
+
+
 
 
 
