@@ -4,6 +4,9 @@ const startButton = document.querySelector("#start");
 const startScreen = document.querySelector('#start-screen');
 let questionTitle = document.getElementById('question-title');
 let answerOptions = document.getElementById('choices')
+const timeEl = document.getElementById('time')
+const endScreen = document.getElementById('end-screen')
+
 
 let unoList = document.createElement('ul')
 //Changing the name of the quiz 
@@ -64,12 +67,32 @@ let question = [
 // Timer starts
 // The first question appears (with its answers)  
 
+let secondsLeft = 10;
 
 startButton.addEventListener('click', function (event) {
   event.preventDefault()
   event.stopPropagation()
   startScreen.classList.add("hide")
   questionContainerElement.classList.remove("hide")
+
+  const timerInteval = setInterval(function () {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft;
+
+
+
+    if (secondsLeft === 0) {
+      clearInterval(timerInteval);
+      endScreen.classList.remove("hide")
+      questionContainerElement.classList.add("hide")
+
+    }
+  }, 1000);
+
+
+
+
+
   showQuestion()
 })
 
@@ -100,7 +123,7 @@ function showQuestion() {
       if (question[0].correctAnswer == i) {
         console.log("you are right")
       }
-      else { console.log("try again") }
+      else { console.log("you are wrong") }
     })
   }
 }
