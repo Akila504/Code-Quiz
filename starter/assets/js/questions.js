@@ -112,6 +112,7 @@ function showQuestion() {
       unoList.appendChild(answers)
       answerOptions.appendChild(unoList)
 
+
       answers.addEventListener('click', function (event) {
         event.preventDefault()
         event.stopPropagation()
@@ -119,18 +120,21 @@ function showQuestion() {
           console.log("you are right")
         }
         else { console.log("you are wrong") }
-        questionNumber = questionNumber + 1
-        questionTitle.innerText = question[questionNumber].title;
-
         //upon click of a answer I want to display the next question 
         //upon click on an answer I want to display th next set of choices 
         //If we reach the last question then we want to go to the end screen after click of answer
+
+
+        questionNumber = questionNumber + 1
+        questionTitle.innerText = question[questionNumber].title;
+        unoList.innerText = ''
+        displayAnswers()
+
       })
     }
   }
 
   displayAnswers()
-
 
 }
 
