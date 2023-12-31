@@ -56,7 +56,6 @@ let question = [
 
 
 
-
 //SECOND SECTION 
 // Landing page:
 // Explanation of the quiz
@@ -75,9 +74,15 @@ startButton.addEventListener('click', function (event) {
   startScreen.classList.add("hide")
   questionContainerElement.classList.remove("hide")
 
+
   const timerInteval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
+
+    if (recordScore === (1)) {
+      clearInterval(timerInteval);
+      console.log(questionNumber)
+    }
 
     if (secondsLeft === 0) {
       clearInterval(timerInteval);
@@ -89,9 +94,11 @@ startButton.addEventListener('click', function (event) {
 
 
   showQuestion()
+
 })
 
 let questionNumber = 0;
+let recordScore = 0;
 
 
 function showQuestion() {
@@ -122,12 +129,27 @@ function showQuestion() {
         else { console.log("you are wrong") }
         //upon click of a answer I want to display the next question 
         //upon click on an answer I want to display th next set of choices 
-        //If we reach the last question then we want to go to the end screen after click of answer
 
 
-        questionNumber = questionNumber + 1
-        questionTitle.innerText = question[questionNumber].title;
-        unoList.innerText = ''
+        //If we reach the last question then we want to go to the end screen after click of answer   
+
+        if (questionNumber < 5) {
+          questionNumber = questionNumber + 1
+          questionTitle.innerText = question[questionNumber].title
+          unoList.innerText = ''
+        }
+
+        else {
+          recordScore = 1
+          endScreen.classList.remove("hide")
+          questionContainerElement.classList.add("hide")
+        }
+
+
+
+
+
+
         displayAnswers()
 
       })
@@ -140,6 +162,9 @@ function showQuestion() {
 
 
 
+
+//When we reach the last question or when the time reaches the last qusetion then we want to go to the end screen
+//If they get a question wrong I want to deduct 10 seconds fro mthe timer
 
 
 
