@@ -126,7 +126,12 @@ function showQuestion() {
         if (question[questionNumber].correctAnswer == i) {
           console.log("you are right")
         }
-        else { console.log("you are wrong") }
+        else {
+          console.log("you are wrong")
+          secondsLeft = secondsLeft - 10
+
+
+        }
         //upon click of a answer I want to display the next question 
         //upon click on an answer I want to display th next set of choices 
 
@@ -162,9 +167,6 @@ function showQuestion() {
 
 
 
-
-//When we reach the last question or when the time reaches the last qusetion then we want to go to the end screen
-//If they get a question wrong I want to deduct 10 seconds fro mthe timer
 
 
 
