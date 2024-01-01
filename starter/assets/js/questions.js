@@ -153,6 +153,7 @@ function showQuestion() {
           recordScore = 1
           endScreen.classList.remove("hide")
           questionContainerElement.classList.add("hide")
+
         }
 
 
@@ -173,22 +174,49 @@ function showQuestion() {
 }
 
 
-//3RD SECTION 
+//3RD SECTION  
+
+
 
 //WHEN THE SUBMIT BUTTON IS CLICKED THE USER IS TAKEN TO THE HIGHSCOES PAGE 
+
+
 
 submitButton.addEventListener('click', function () {
   window.location.href = 'highscores.html';
 
   let userinit = document.getElementById('initials').value
-  var myScore = {
+
+  let myScore = [{
     initial: userinit,
     score: finalScore.innerText
+  }]
+
+
+  //   function storeScores() {
+  //   let StoredJson = JSON.parse(localStorage.getItem('testJson'))
+  //   if (StoredJson !== null) {
+  //     myScore = StoredJson
+  //   }
+  //   console.log(StoredJson)
+  // } 
+
+  let StoredJson = JSON.parse(localStorage.getItem('testJson'))
+
+  if (StoredJson !== null) {
+    myScore = StoredJson.concat(myScore)
+    //myScore.push(StoredJson)
+    localStorage.setItem("testJson", JSON.stringify(myScore))
+  } else {
+    localStorage.setItem("testJson", JSON.stringify(myScore))
   }
-  var myJson = JSON.stringify(myScore)
-  localStorage.setItem("testJson", myJson)
 
 })
+
+console.log(window)
+
+
+
 
 // I will have the user enter their initlas
 //the initials and user score can get stored as one
