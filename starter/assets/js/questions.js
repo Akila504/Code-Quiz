@@ -6,6 +6,7 @@ let questionTitle = document.getElementById('question-title');
 let answerOptions = document.getElementById('choices')
 const timeEl = document.getElementById('time')
 const endScreen = document.getElementById('end-screen')
+const finalScore = document.getElementById('final-score')
 
 
 let unoList = document.createElement('ul')
@@ -80,14 +81,18 @@ startButton.addEventListener('click', function (event) {
     timeEl.textContent = secondsLeft;
 
     if (recordScore === (1)) {
+      finalScore.innerText = secondsLeft
       clearInterval(timerInteval);
       console.log(questionNumber)
+
     }
 
     if (secondsLeft === 0) {
       clearInterval(timerInteval);
       endScreen.classList.remove("hide")
       questionContainerElement.classList.add("hide")
+      finalScore.innerText = secondsLeft
+
 
     }
   }, 1000);
@@ -138,7 +143,7 @@ function showQuestion() {
 
         //If we reach the last question then we want to go to the end screen after click of answer   
 
-        if (questionNumber < 5) {
+        if (questionNumber < (question.length - 1)) {
           questionNumber = questionNumber + 1
           questionTitle.innerText = question[questionNumber].title
           unoList.innerText = ''
@@ -155,7 +160,9 @@ function showQuestion() {
 
 
 
+
         displayAnswers()
+
 
       })
     }
@@ -165,9 +172,13 @@ function showQuestion() {
 
 }
 
+//Next I want to display the users score
+//When they write their initials they are taken to the highscore page
+//We want to store the scores in local storage
+//sort the highscore from highest to lowest
 
-
-
+//for tomorrow
+//User has the option to take the quiz again
 
 
 // For each question:
