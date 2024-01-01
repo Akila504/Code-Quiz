@@ -7,7 +7,7 @@ let answerOptions = document.getElementById('choices')
 const timeEl = document.getElementById('time')
 const endScreen = document.getElementById('end-screen')
 const finalScore = document.getElementById('final-score')
-
+const submitButton = document.getElementById('submit')
 
 let unoList = document.createElement('ul')
 //Changing the name of the quiz 
@@ -171,6 +171,18 @@ function showQuestion() {
   displayAnswers()
 
 }
+
+
+//3RD SECTION 
+
+//WHEN THE SUBMIT BUTTON IS CLICKED THE USER IS TAKEN TO THE HIGHSCOES PAGE 
+
+submitButton.addEventListener('click', function () {
+  window.location.href = 'highscores.html';
+})
+
+
+
 
 //Next I want to display the users score
 //When they write their initials they are taken to the highscore page
