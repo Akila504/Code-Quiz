@@ -9,6 +9,8 @@ const endScreen = document.getElementById('end-screen')
 const finalScore = document.getElementById('final-score')
 const submitButton = document.getElementById('submit')
 
+
+
 let unoList = document.createElement('ul')
 //Changing the name of the quiz 
 pageTitle.innerText = "Harry Potter Coding Quiz"
@@ -83,8 +85,6 @@ startButton.addEventListener('click', function (event) {
     if (recordScore === (1)) {
       finalScore.innerText = secondsLeft
       clearInterval(timerInteval);
-      console.log(questionNumber)
-
     }
 
     if (secondsLeft === 0) {
@@ -179,15 +179,34 @@ function showQuestion() {
 
 submitButton.addEventListener('click', function () {
   window.location.href = 'highscores.html';
+
+  let userinit = document.getElementById('initials').value
+  var myScore = {
+    initial: userinit,
+    score: finalScore.innerText
+  }
+  var myJson = JSON.stringify(myScore)
+  localStorage.setItem("testJson", myJson)
+
 })
 
+// I will have the user enter their initlas
+//the initials and user score can get stored as one
+//want to sort the highscores while still being able to refer to the initials
+//Display all the high scores
 
 
 
-//Next I want to display the users score
-//When they write their initials they are taken to the highscore page
-//We want to store the scores in local storage
-//sort the highscore from highest to lowest
+
+
+
+
+
+// User submits form
+// Initials and score get stored in local storage
+// User is taken to the high scores page
+// High scores are listed, sorted highest to lowest
+// User has option to take the quiz again
 
 //for tomorrow
 //User has the option to take the quiz again
