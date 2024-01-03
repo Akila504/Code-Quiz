@@ -2,6 +2,8 @@
 //select the highscores ordered list 
 const highScorehistory = document.getElementById("highscores");
 
+const clearBtn = document.getElementById('clear')
+
 //retrive the highscores oredered list from local storage
 let StoredJson = JSON.parse(localStorage.getItem('testJson'))
 
@@ -18,3 +20,11 @@ for (let i = 0; i < sortedJson.length; i++) {
   li.textContent = `${sortedJson[i].initial} -${sortedJson[i].score}`
   highScorehistory.appendChild(li)
 }
+
+//add event listener for when the clear button is clicked 
+
+clearBtn.addEventListener("click", function (event) {
+  event.preventDefault()
+  localStorage.clear();
+  highScorehistory.innerText = ''
+})
