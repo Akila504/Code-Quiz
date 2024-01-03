@@ -9,6 +9,7 @@ const endScreen = document.getElementById('end-screen')
 const finalScore = document.getElementById('final-score')
 const submitButton = document.getElementById('submit')
 
+const feedback = document.getElementById("feedback")
 
 
 let unoList = document.createElement('ul')
@@ -60,14 +61,9 @@ let question = [
 
 
 //SECOND SECTION 
-// Landing page:
-// Explanation of the quiz
-// Start button
+//we first set the second left 
+// in the event of the start button getting click we hide the starscreen and start the game by unhiding the questions 
 
-// Click the start button:
-// Landing page goes away
-// Timer starts
-// The first question appears (with its answers)  
 
 let secondsLeft = 100;
 
@@ -78,15 +74,17 @@ startButton.addEventListener('click', function (event) {
   questionContainerElement.classList.remove("hide")
 
 
+
+
   const timerInteval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
-
+    //if the recordScore =1 then we clear the interval i.e when we have reached the last question before time has run out
     if (recordScore === (1)) {
       finalScore.innerText = secondsLeft
       clearInterval(timerInteval);
     }
-
+    // clear the interval if the time = 0
     if (secondsLeft === 0) {
       clearInterval(timerInteval);
       endScreen.classList.remove("hide")
@@ -107,12 +105,8 @@ let recordScore = 0;
 
 
 function showQuestion() {
-  //when the question number is 0 
-  //We want to get the question 0 and the choices at question 0 
-  //add button elements to the list items 
-  //so when the button is clicked we go to the next question 
-  //When the user click a question we go to the next question 
-  //if the user Clicks the correct choice we signal correct else wrong
+  //create list elements to store the answers  
+  //loop through the length of the answers and append to the ul
 
   questionTitle.innerText = question[questionNumber].title;
 
@@ -124,36 +118,45 @@ function showQuestion() {
       unoList.appendChild(answers)
       answerOptions.appendChild(unoList)
 
+      //event listener for click of answer   
+      //if the user is right we notify they are correct else we notify they are incorrect
 
       answers.addEventListener('click', function (event) {
         event.preventDefault()
         event.stopPropagation()
+
         if (question[questionNumber].correctAnswer == i) {
           console.log("you are right")
+
+          feedback.textContent = "you are right"
+          feedback.classList.remove("hide")
+          setTimeout('feedback.classList.add("hide")', 1000)
+
         }
         else {
           console.log("you are wrong")
           secondsLeft = secondsLeft - 10
-
-
+          feedback.classList.remove("hide")
+          feedback.textContent = "you are wrong"
+          setTimeout('feedback.classList.add("hide")', 1000)
         }
-        //upon click of a answer I want to display the next question 
-        //upon click on an answer I want to display th next set of choices 
 
 
-        //If we reach the last question then we want to go to the end screen after click of answer   
+
+
+
+        //if the questions has not reached the last question we want to going to the next question in the event of a click of answer
 
         if (questionNumber < (question.length - 1)) {
           questionNumber = questionNumber + 1
           questionTitle.innerText = question[questionNumber].title
           unoList.innerText = ''
         }
-
+        //If we reach the last question then we want to go to the end screen after click of answer   
         else {
           recordScore = 1
           endScreen.classList.remove("hide")
           questionContainerElement.classList.add("hide")
-
         }
 
 
@@ -176,11 +179,10 @@ function showQuestion() {
 
 //3RD SECTION  
 
-
-
-//WHEN THE SUBMIT BUTTON IS CLICKED THE USER IS TAKEN TO THE HIGHSCOES PAGE 
-
-
+//WHEN THE SUBMIT BUTTON IS CLICKED THE USER IS TAKEN TO THE HIGHSCOES PAGE  
+//where the the users initials values is set into an object in an array along with the score 
+//which is set in local storage 
+//if there is already data in local storage this will concat the previous data with the current data and set into local storage
 
 submitButton.addEventListener('click', function () {
   window.location.href = 'highscores.html';
@@ -192,20 +194,11 @@ submitButton.addEventListener('click', function () {
     score: finalScore.innerText
   }]
 
-
-  //   function storeScores() {
-  //   let StoredJson = JSON.parse(localStorage.getItem('testJson'))
-  //   if (StoredJson !== null) {
-  //     myScore = StoredJson
-  //   }
-  //   console.log(StoredJson)
-  // } 
-
   let StoredJson = JSON.parse(localStorage.getItem('testJson'))
 
   if (StoredJson !== null) {
     myScore = StoredJson.concat(myScore)
-    //myScore.push(StoredJson)
+
     localStorage.setItem("testJson", JSON.stringify(myScore))
   } else {
     localStorage.setItem("testJson", JSON.stringify(myScore))
@@ -213,10 +206,6 @@ submitButton.addEventListener('click', function () {
 
 })
 
-// I will have the user enter their initlas
-//the initials and user score can get stored as one
-//want to sort the highscores while still being able to refer to the initials
-//Display all the high scores
 
 
 
@@ -224,33 +213,3 @@ submitButton.addEventListener('click', function () {
 
 
 
-
-// User submits form
-// Initials and score get stored in local storage
-// User is taken to the high scores page
-// High scores are listed, sorted highest to lowest
-// User has option to take the quiz again
-
-//for tomorrow
-//User has the option to take the quiz again
-
-
-// For each question:
-// User clicks an answer
-// Their choice is compared to the correct answer as stored in the question's object
-// If correct, tell them
-// If incorrect, tell them AND subtract time from the timer
-// Optional: play a sound for correct or incorrect
-// Either way, the question disappears after a few seconds and the next question appears
-
-// After the last question:
-// Timer stops
-// Question disappears
-// Form appears for user to enter their initials
-// Display their score
-
-// User submits form
-// Initials and score get stored in local storage
-// User is taken to the high scores page
-// High scores are listed, sorted highest to lowest
-// User has option to take the quiz again
