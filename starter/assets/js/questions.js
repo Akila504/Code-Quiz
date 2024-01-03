@@ -15,7 +15,7 @@ const feedback = document.getElementById("feedback")
 
 let unoList = document.createElement('ul')
 //Changing the name of the quiz 
-pageTitle.innerText = "Harry Potter Coding Quiz"
+pageTitle.innerText = "Harry Potter Quiz"
 
 //change the decription of quiz 
 pageDesc.innerText = "Try to answer the following Harry Potter related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
