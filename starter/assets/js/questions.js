@@ -112,11 +112,16 @@ function showQuestion() {
 
   function displayAnswers() {
     for (let i = 0; i < 3; i++) {
+
+      let button = document.createElement('button')
       let answers = document.createElement('li')
+      answers = answers.appendChild(button)
+
       answers.innerText = question[questionNumber].choices[i]
       console.log(answers)
       unoList.appendChild(answers)
       answerOptions.appendChild(unoList)
+
 
       //event listener for click of answer   
       //if the user is right we notify they are correct else we notify they are incorrect
@@ -125,6 +130,7 @@ function showQuestion() {
         event.preventDefault()
         event.stopPropagation()
 
+        //if the user got the question right or wrong unhide the feed back and then hide the feedback again after 1 second
         if (question[questionNumber].correctAnswer == i) {
           console.log("you are right")
 
