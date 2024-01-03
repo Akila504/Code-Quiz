@@ -213,11 +213,6 @@ submitButton.addEventListener('click', function () {
 
 })
 
-console.log(window)
-
-
-
-
 // I will have the user enter their initlas
 //the initials and user score can get stored as one
 //want to sort the highscores while still being able to refer to the initials
