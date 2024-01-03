@@ -1,5 +1,6 @@
 const questionContainerElement = document.getElementById("questions")
 const pageTitle = document.querySelector('h1')
+const pageDesc = document.querySelector("p");
 const startButton = document.querySelector("#start");
 const startScreen = document.querySelector('#start-screen');
 let questionTitle = document.getElementById('question-title');
@@ -15,6 +16,9 @@ const feedback = document.getElementById("feedback")
 let unoList = document.createElement('ul')
 //Changing the name of the quiz 
 pageTitle.innerText = "Harry Potter Coding Quiz"
+
+//change the decription of quiz 
+pageDesc.innerText = "Try to answer the following Harry Potter related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
 
 //FIRST SECTION 
 
@@ -105,8 +109,11 @@ let recordScore = 0;
 
 
 function showQuestion() {
-  //create list elements to store the answers  
-  //loop through the length of the answers and append to the ul
+  //create list elements to store the answers   
+  //create a button element 
+  //append the button element to the list element so we can ge the CSS for the button elements
+  //loop through the length of the answers and append to the ul  
+
 
   questionTitle.innerText = question[questionNumber].title;
 
@@ -191,7 +198,7 @@ function showQuestion() {
 //if there is already data in local storage this will concat the previous data with the current data and set into local storage
 
 submitButton.addEventListener('click', function () {
-  window.location.href = 'highscores.html';
+  window.location.href = './starter/highscores.html';
 
   let userinit = document.getElementById('initials').value
 
